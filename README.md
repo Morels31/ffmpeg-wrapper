@@ -4,7 +4,7 @@ Simple python3 ffmpeg wrapper intended for personal use.
 
 
 ## TODO
-- [x] Thinker
+- [x] Think
 - [x] Base script
 - [x] Ask user the codec, preset and crf
 - [ ] Check input files existance and read permission.
