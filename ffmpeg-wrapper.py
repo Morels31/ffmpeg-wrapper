@@ -2,13 +2,13 @@
 
 
 
-formats = [
+codecs = [
     "h265 10bit",
     "h265",
     "h264"
 ]
 
-format_options = [
+codec_options = [
     "-pix_fmt yuv420p10le -c:v libx265 -x265-params profile=main10",
     "-c:v libx265 -x265-params profile=main10",
     "-c:v libx264"
@@ -82,14 +82,14 @@ def choice(askStr, options):
 
 
 def main():
-    c_format = choice("\nSelect format: ", formats)
+    c_codec = choice("\nSelect codec: ", codecs)
 
     c_preset = choice("\nSelect preset: ", presets)
 
     crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
 
 
-    print(c_format)
+    print(c_codec)
     print(c_preset)
     print(crf)
 
