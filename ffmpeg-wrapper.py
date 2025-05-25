@@ -7,7 +7,7 @@ help_message = """
 USAGE: ffmpeg-wrapper [OPTIONS] inputFile1 ... inputFileN
 
 OPTIONS:
-        -d --use-defaults    Do not ask the user for input, use defaults.
+    -d, --use-defaults    Do not ask the user for input, use defaults.
 """
 
 codecs = {
