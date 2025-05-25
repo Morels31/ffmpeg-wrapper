@@ -167,6 +167,15 @@ def createOutputDir(output_dir):
 
 
 
+# Changes the file extension,
+# returns the result
+
+def changeExtension(file, new_ext):
+    basename , _ = os.path.splitext(file)
+    return basename + "." + new_ext
+
+
+
 
 
 def main():
