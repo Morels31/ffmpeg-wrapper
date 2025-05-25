@@ -39,7 +39,7 @@ default_output_dir = "./renders-output"
 # Prints the error string taken in input and terminates the script.
 
 def errorr(s):
-    print("ERROR: "+str(s)+". Exiting...")
+    print(f"ERROR: {s}. Exiting...")
     sys.exit(1)
 
 
@@ -72,7 +72,7 @@ def choice(askStr, options):
     while True:
         print(askStr)
         for i in range(l):
-            print("\t"+str(i)+") "+options[i])
+            print(f"\t{i}) {options[i]}")
 
         x = input("\nEnter a number (default is 0): ")
 
