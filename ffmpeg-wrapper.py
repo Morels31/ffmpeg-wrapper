@@ -109,17 +109,18 @@ def main():
         sys.exit(1)
 
 
+    if use_defaults:
+        codec = default_codec
+        preset = default_preset
+        crf = default_crf
+    else:
+        codec = choice("\nSelect codec: ", default_codec, codecs)
+        preset = choice("\nSelect preset: ", default_preset, presets)
+        crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
 
 
-    c_codec = choice("\nSelect codec: ", default_codec, codecs)
-
-    c_preset = choice("\nSelect preset: ", default_preset, presets)
-
-    crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
-
-
-    print(c_codec)
-    print(c_preset)
+    print(codec)
+    print(preset)
     print(crf)
 
 
