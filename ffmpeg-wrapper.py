@@ -11,6 +11,8 @@ OPTIONS:
     -d, --use-defaults    Do not ask the user for input, use defaults.
 """
 
+keep_container_string = "Keep the same"
+
 codecs = {
     "h264"       : "-c:v libx264",
     "h265"       : "-c:v libx265 -x265-params profile=main10",
@@ -23,9 +25,17 @@ presets = [
     "fast"
 ]
 
+containers = [
+    keep_container_string
+    "mp4"
+    "mkv"
+]
+
 default_codec = "h265 10bit"
 
 default_preset = "slow"
+
+default_container = "mkv"
 
 default_crf = 20
 
@@ -179,11 +189,13 @@ def main():
     if use_defaults:
         codec = default_codec
         preset = default_preset
+        container = default_container
         crf = default_crf
         output_dir = default_output_dir
     else:
         codec = choice("\nSelect codec: ", default_codec, codecs)
         preset = choice("\nSelect preset: ", default_preset, presets)
+        container = choice("\nSelect container: ", default_container, containers)
         crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
         output_dir = input("\nEnter output directory (or press ENTER for default): ")
         if (len(output_dir) == 0):
