@@ -26,8 +26,8 @@ presets = [
 ]
 
 containers = [
-    keep_container_string
-    "mp4"
+    keep_container_string,
+    "mp4",
     "mkv"
 ]
 
@@ -185,7 +185,7 @@ def changeExtension(file, new_ext):
 #     ...
 # }
 
-def initRenderDataDictionary(input_files, output_dir, container)
+def initRenderDataDictionary(input_files, output_dir, container):
     keep_container = container == keep_container_string
 
     render_data = {}
