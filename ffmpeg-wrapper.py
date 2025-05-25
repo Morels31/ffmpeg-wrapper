@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import os
 import sys
 
 
@@ -93,6 +94,31 @@ def choice(ask_str, default, options):
 
 
 
+# Given an array of file paths in input,
+# returns an array of the files that do not exists.
+
+def checkFilesExistance(file_array):
+    res = []
+    for file in file_array:
+        if (not os.path.isfile(file)):
+            res.append(file)
+    return res
+
+
+
+# Given an array of file paths in input,
+# returns an array of the files without the given 'permission'.
+# 'permission' can be: os.R_OK, os.W_OK or os.X_OK
+
+def checkFilesPermission(file_array, permission):
+    res = []
+    for file in file_array:
+        if (not os.access(file, permission)):
+            res.append(file)
+    return res
+
+
+
 
 
 def main():
@@ -122,6 +148,13 @@ def main():
     print(codec)
     print(preset)
     print(crf)
+
+    print("Existance")
+    print(checkFilesExistance(input_files))
+    print("Read permission")
+    print(checkFilesPermission(input_files, os.R_OK))
+    print("Write permission")
+    print(checkFilesPermission(input_files, os.W_OK))
 
 
 
