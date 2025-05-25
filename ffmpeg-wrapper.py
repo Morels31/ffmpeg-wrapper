@@ -28,6 +28,10 @@ presets = [
     "fast"
 ]
 
+default_codec = "h265 10bit"
+
+default_preset = "slow"
+
 default_crf = 20
 
 default_output_dir = "./renders-output"
@@ -64,25 +68,32 @@ def askNumber(ask_str, default, minimum, maximum):
 
 
 
-# Gets in input a string that will be printed,
-# and an array of strings (choices).
-# Returns the chosen one. (default is 0)
+# Ask the user via the 'ask_str' string
+# to choose between an array (or dictionary) of 'options'.
+# Returns the choosen option, or the 'default' one.
 
-def choice(askStr, options):
-    l = len(options)
+def choice(ask_str, default, options):
+    options = list(options)
+    if (default not in options):
+        errorr("Default option is not a valid option")
+
     while True:
-        print(askStr)
-        for i in range(l):
-            print(f"\t{i}) {options[i]}")
+        print(ask_str)
 
-        x = input("\nEnter a number (default is 0): ")
+        for index, key in enumerate(options):
+            if key == default:
+                print(f"\t{index}) {key} (default)")
+            else:
+                print(f"\t{index}) {key}")
+
+        x = input("\nEnter a number: ")
 
         if (len(x) == 0):
-            return 0
+            return default
         if (x.isnumeric()):
             x = int(x)
-            if (x >= 0 and x < l):
-                return x
+            if (x >= 0 and x < len(options)):
+                return options[x]
 
         print("\nInvalid choice, retry")
 
@@ -106,9 +117,9 @@ def main():
 
 
 
-    c_codec = choice("\nSelect codec: ", codecs)
+    c_codec = choice("\nSelect codec: ", default_codec, codecs)
 
-    c_preset = choice("\nSelect preset: ", presets)
+    c_preset = choice("\nSelect preset: ", default_preset, presets)
 
     crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
 
