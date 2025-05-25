@@ -44,12 +44,13 @@ def errorr(s):
 
 
 
-# Ask the user to enter a number between 'minimum' and 'maximum' (included)
-# if the user does not enter anything, the function returns the default
+# Ask the user via the 'ask_str' string
+# to enter a number between 'minimum' and 'maximum' (included).
+# If the user does not enter anything, the function returns the 'default'
 
-def askNumber(askStr, default, minimum, maximum):
+def askNumber(ask_str, default, minimum, maximum):
     while True:
-        x = input(askStr)
+        x = input(ask_str)
 
         if (len(x) == 0):
             return default
@@ -92,13 +93,13 @@ def choice(askStr, options):
 def main():
 
     if (len(sys.argv) > 1 and (sys.argv[1] == "--use-defaults" or sys.argv[1] == "-d")):
-        useDefaults = True
-        inputFiles = sys.argv[2:]
+        use_defaults = True
+        input_files = sys.argv[2:]
     else:
-        useDefaults = False
-        inputFiles = sys.argv[1:]
+        use_defaults = False
+        input_files = sys.argv[1:]
 
-    if len(inputFiles) == 0:
+    if len(input_files) == 0:
         print(help_message, end="")
         sys.exit(1)
 
