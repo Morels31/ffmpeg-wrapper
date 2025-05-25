@@ -1,6 +1,14 @@
 #! /usr/bin/env python3
 
+import sys
 
+
+help_message = """
+USAGE: ffmpeg-wrapper [OPTIONS] inputFile1 ... inputFileN
+
+OPTIONS:
+        -d --use-defaults    Do not ask the user for input, use defaults.
+"""
 
 codecs = [
     "h265 10bit",
@@ -82,6 +90,21 @@ def choice(askStr, options):
 
 
 def main():
+
+    if (len(sys.argv) > 1 and (sys.argv[1] == "--use-defaults" or sys.argv[1] == "-d")):
+        useDefaults = True
+        inputFiles = sys.argv[2:]
+    else:
+        useDefaults = False
+        inputFiles = sys.argv[1:]
+
+    if len(inputFiles) == 0:
+        print(help_message, end="")
+        sys.exit(1)
+
+
+
+
     c_codec = choice("\nSelect codec: ", codecs)
 
     c_preset = choice("\nSelect preset: ", presets)
