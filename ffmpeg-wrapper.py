@@ -145,18 +145,6 @@ def main():
         crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
 
 
-    print(codec)
-    print(preset)
-    print(crf)
-
-    print("Existance")
-    print(checkFilesExistance(input_files))
-    print("Read permission")
-    print(checkFilesPermission(input_files, os.R_OK))
-    print("Write permission")
-    print(checkFilesPermission(input_files, os.W_OK))
-
-
 
 
 
