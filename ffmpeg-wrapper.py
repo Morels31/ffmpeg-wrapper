@@ -10,17 +10,11 @@ OPTIONS:
         -d --use-defaults    Do not ask the user for input, use defaults.
 """
 
-codecs = [
-    "h265 10bit",
-    "h265",
-    "h264"
-]
-
-codec_options = [
-    "-pix_fmt yuv420p10le -c:v libx265 -x265-params profile=main10",
-    "-c:v libx265 -x265-params profile=main10",
-    "-c:v libx264"
-]
+codecs = {
+    "h264"       : "-c:v libx264",
+    "h265"       : "-c:v libx265 -x265-params profile=main10",
+    "h265 10bit" : "-pix_fmt yuv420p10le -c:v libx265 -x265-params profile=main10"
+}
 
 presets = [
     "slow",
