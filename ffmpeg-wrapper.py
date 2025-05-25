@@ -142,6 +142,23 @@ def checkInputFiles(input_files):
 
 
 
+# Create the output directory if it doen't exists.
+# Check write and execute permission if it does.
+
+def createOutputDir(output_dir):
+    if os.path.isdir(output_dir):
+        if ((not os.access(output_dir, os.W_OK)) or (not os.access(output_dir, os.X_OK))):
+            errorr("Cannot write to already existing output directory, permission denied")
+    else:
+        try:
+            os.makedirs(output_dir)
+        except Exception as e:
+            errorr(e)
+
+
+
+
+
 def main():
 
     if (len(sys.argv) > 1 and (sys.argv[1] == "--use-defaults" or sys.argv[1] == "-d")):
@@ -151,20 +168,28 @@ def main():
         use_defaults = False
         input_files = sys.argv[1:]
 
+
     if (len(input_files) == 0):
         print(help_message, end="")
         sys.exit(1)
 
     checkInputFiles(input_files)
 
+
     if use_defaults:
         codec = default_codec
         preset = default_preset
         crf = default_crf
+        output_dir = default_output_dir
     else:
         codec = choice("\nSelect codec: ", default_codec, codecs)
         preset = choice("\nSelect preset: ", default_preset, presets)
         crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
+        output_dir = input("\nEnter output directory (or press ENTER for default): ")
+        if (len(output_dir) == 0):
+            output_dir = default_output_dir
+
+    createOutputDir(output_dir)
 
 
 
