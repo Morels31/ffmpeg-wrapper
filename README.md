@@ -16,3 +16,4 @@ Simple python3 ffmpeg wrapper intended for personal use.
 - [ ] Optional: time how much time each file has taken.
 - [ ] Optional: check if output file is smaller, and if it is by how much.
 - [ ] Optional: Makefile to install the script
+- [ ] Optional: Telegram notification when rendering has been finished.
