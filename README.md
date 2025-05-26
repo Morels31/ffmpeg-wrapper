@@ -1,6 +1,6 @@
 # ffmpeg-wrapper
 
-Simple python3 ffmpeg wrapper intended for personal use.
+python3 ffmpeg wrapper intended for personal use.
 
 
 ## TODO
@@ -11,9 +11,15 @@ Simple python3 ffmpeg wrapper intended for personal use.
 - [x] Ask user output directory.
 - [x] Create the output directory if it doesn't exists (error if cannot write).
 - [ ] Check if output files already exists, and ask the user to overwrite or not (check write permission).
+- [ ] Normalize input files and output directory path.
+- [ ] Mantain sub-directory tree of the output files.
 - [ ] Execute ffmpeg and check return code, if failed save failed filenames and logs and report it later.
-- [x] Optional: add --use-defaults argument
-- [ ] Optional: time how much time each file has taken.
-- [ ] Optional: check if output file is smaller, and if it is by how much.
-- [ ] Optional: Makefile to install the script
-- [ ] Optional: Telegram notification when rendering has been finished.
+- [x] Add --use-defaults argument
+- [ ] Time how much time each file has taken.
+- [ ] Check if output file is smaller, and if it is by how much.
+
+## Optional TODO
+- [ ] Makefile to install the script
+- [ ] Telegram notification when rendering has been finished.
+- [ ] Option to automatically delete files smaller than the original.
+- [ ] Option to automatically replace original files.
