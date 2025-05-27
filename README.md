@@ -17,6 +17,7 @@ python3 ffmpeg wrapper intended for personal use.
 - [x] Add --use-defaults argument
 - [ ] Time how much time each file has taken.
 - [ ] Check if output file is smaller, and if it is by how much.
+- [ ] Check if ffmpeg is installed and get executable's path
 
 ## Optional TODO
 - [ ] Makefile to install the script
