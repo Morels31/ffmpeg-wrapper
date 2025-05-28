@@ -178,30 +178,11 @@ def changeExtension(file, new_ext):
 
 
 
-# Initialize render data dictionary,
-# it will have this structure: render_data = {
-#     input_file : {
-#         output_file : string,
-#         initial_size : integer
-#     },
-#     ...
-# }
 
-def initRenderDataDictionary(input_files, output_dir, container):
-    keep_container = container == keep_container_string
 
-    render_data = {}
 
-    for input_file in input_files:
-        render_data[input_file] = {}
-        if keep_container:
-            render_data[input_file]["output_file"] = os.path.join(output_dir, input_file)
-        else:
-            render_data[input_file]["output_file"] = os.path.join(output_dir, changeExtension(input_file, container))
 
-        render_data[input_file]["initial_size"] = os.path.getsize(input_file)
 
-    return render_data
 
 
 
@@ -241,7 +222,6 @@ def main():
 
     createOutputDir(output_dir)
 
-    render_data = initRenderDataDictionary(input_files, output_dir, container)
 
 
 
