@@ -2,6 +2,7 @@
 
 import os
 import sys
+import subprocess
 
 
 help_message = """
@@ -178,11 +179,45 @@ def changeExtension(file, new_ext):
 
 
 
+# Execute ffmpeg in a subprocess,
+# 'options' is an array of arguments that will be given to ffmpeg.
+# Returns the return code of the called process.
 
+def ffmpegRender(input_file, output_file, options):
 
+    command = ["ffmpeg", "-i", input_file] + options + [ output_file ]
 
+    try:
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1
+        )
 
+        while True:
+            line = process.stdout.readline()
+            if not line:
+                break
 
+            if line.strip().startswith("frame"):
+                print(f"\r{line.rstrip()}", end="", flush=True)
+            #else:
+            #    log(line)
+
+        print()
+        return process.wait()
+
+    except Exception as e:
+
+        try:
+            process.kill()
+        except:
+            pass
+
+        print(f"ERROR: Failed rendering \"{input_file}\". Exception: {e}")
+        return 1
 
 
 
@@ -222,6 +257,22 @@ def main():
 
     createOutputDir(output_dir)
 
+    ffmpeg_options = codecs[codec] + ["-preset", preset, "-crf", str(crf), "-y"]
+
+    # check already existing files, ask to overwrite, or skip them
+
+
+    for input_file in input_files:
+        if (container == keep_container_string):
+            output_file = os.path.join(output_dir, input_file)
+        else:
+            output_file = os.path.join(output_dir, changeExtension(input_file, container))
+
+        # handle sub-dir tree
+        ffmpegRender(input_file, output_file, ffmpeg_options)
+
+
+    print("\n\nScript finished.")
 
 
 
