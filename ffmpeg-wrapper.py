@@ -20,9 +20,11 @@ codecs = {
 }
 
 presets = [
+    "slower",
     "slow",
     "medium",
-    "fast"
+    "fast",
+    "ultrafast"
 ]
 
 containers = [
