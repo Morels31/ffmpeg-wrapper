@@ -14,9 +14,9 @@ OPTIONS:
 keep_container_string = "Keep the same"
 
 codecs = {
-    "h264"       : "-c:v libx264",
-    "h265"       : "-c:v libx265 -x265-params profile=main10",
-    "h265 10bit" : "-pix_fmt yuv420p10le -c:v libx265 -x265-params profile=main10"
+    "h264"       : ["-c:v", "libx264"],
+    "h265"       : ["-c:v", "libx265", "-x265-params", "profile=main10"],
+    "h265 10bit" : ["-pix_fmt", "yuv420p10le", "-c:v", "libx265", "-x265-params", "profile=main10"]
 }
 
 presets = [
