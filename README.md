@@ -6,7 +6,7 @@ python3 ffmpeg wrapper intended for personal use.
 ## TODO
 - [x] Think
 - [x] Base script
-- [x] Ask user the codec, preset and crf
+- [x] Ask user the codec, preset and crf.
 - [x] Check input files existance and read permission.
 - [x] Ask user output directory.
 - [x] Create the output directory if it doesn't exists (error if cannot write).
@@ -14,13 +14,13 @@ python3 ffmpeg wrapper intended for personal use.
 - [ ] Normalize input files and output directory path.
 - [ ] Mantain sub-directory tree of the output files.
 - [ ] Execute ffmpeg and check return code, if failed save failed filenames and logs and report it later.
-- [x] Add --use-defaults argument
-- [ ] Time how much time each file has taken.
-- [ ] Check if output file is smaller, and if it is by how much.
-- [ ] Check if ffmpeg is installed and get executable's path
+- [x] Add --use-defaults argument.
+- [ ] Check if ffmpeg is installed.
 
 ## Optional TODO
-- [ ] Makefile to install the script
+- [ ] Time how much time each file has taken.
+- [ ] Check if output file is smaller, and if it is by how much.
+- [ ] Makefile to install the script.
 - [ ] Telegram notification when rendering has been finished.
 - [ ] Option to automatically delete files smaller than the original.
 - [ ] Option to automatically replace original files.
