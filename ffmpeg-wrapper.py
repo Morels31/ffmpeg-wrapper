@@ -44,6 +44,8 @@ default_crf = 20
 
 default_output_dir = "./renders-output"
 
+default_overwrite_existing_output = True
+
 
 
 
@@ -194,6 +196,31 @@ def checkInputFiles(input_files):
 
 
 
+# Given an array of file paths in input,
+# checks if all the files are unique,
+# asks the user if to overwrite or not,
+# and if files to be overwritten are writable.
+# if not, throws an error and exits
+
+def checkOutputFiles(output_files):
+    tmp_set = set(output_files)
+    if (len(tmp_set) != len(output_files)):
+        errorr("Some input files generate the same output file")
+
+    existent_output_files, _ = checkFilesExistence(output_files)
+    if (len(existent_output_files)>0):
+        print(f"\nWARNING: Continuing those files will be overwrited: \n\t\"{'"\n\t"'.join(existent_output_files)}\"\n")
+
+        if not askYesNo("Continue?", default_overwrite_existing_output):
+            sys.exit(1)
+
+        _, non_writable_files = checkFilesPermission(output_files, os.W_OK)
+        if (len(non_writable_files) > 0):
+            print(f"\nERROR: Some of the files given in input are not writable: \n\t\"{'"\n\t"'.join(non_writable_files)}\"\n\nExiting...")
+            sys.exit(1)
+
+
+
 # Create the output directory if it doen't exists.
 # Check write and execute permission if it does.
 
@@ -298,21 +325,32 @@ def main():
         if (len(output_dir) == 0):
             output_dir = default_output_dir
 
-    createOutputDir(output_dir)
-
     ffmpeg_options = codecs[codec] + ["-preset", preset, "-crf", str(crf), "-y"]
 
-    # check already existing files, ask to overwrite, or skip them
+    createOutputDir(output_dir)
 
 
-    for input_file in input_files:
-        if (container == keep_container_string):
-            output_file = os.path.join(output_dir, input_file)
-        else:
-            output_file = os.path.join(output_dir, changeExtension(input_file, container))
+    if (container == keep_container_string):
+        output_files = [ os.path.join(output_dir, input_file) for input_file in input_files ]
+    else:
+        output_files = [ os.path.join(output_dir, changeExtension(input_file, container)) for input_file in input_files ]
 
-        # handle sub-dir tree
-        ffmpegRender(input_file, output_file, ffmpeg_options)
+    checkOutputFiles(output_files)
+
+
+    # print a summary of the actions before starting
+
+
+    if (len(input_files) != len(output_files)):
+        errorr("Paranoid error")
+
+    for i in range(len(input_files)):
+
+        # handle output sub-dir tree
+
+        ffmpegRender(input_files[i], output_files[i], ffmpeg_options)
+
+        # handle errors
 
 
     print("\n\nScript finished.")
