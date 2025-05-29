@@ -57,6 +57,26 @@ def errorr(s):
 
 
 # Ask the user via the 'ask_str' string
+# to enter "y" (yes) or "n" (no), and returns corrispectively True or False,
+# if the user input is empty returns the 'default' boolean.
+
+def askYesNo(ask_str, default):
+    while True:
+        x = input(f"{ask_str} [{"Y/n" if default else "y/N"}]: ")
+
+        if (len(x) == 0):
+            return default
+
+        if x.lower() == "y":
+            return True
+        if x.lower() == "n":
+            return False
+
+        print("\nInvalid choice, retry")
+
+
+
+# Ask the user via the 'ask_str' string
 # to enter a number between 'minimum' and 'maximum' (included).
 # If the user does not enter anything, the function returns the 'default'
 
