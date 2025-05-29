@@ -139,19 +139,11 @@ def checkFilesPermission(file_array, permission):
 def checkInputFiles(input_files):
     non_existent_files = checkFilesExistence(input_files)
     if (len(non_existent_files) > 0):
-        print("ERROR: Some of the files given in input do not exists:", end="")
-        for file in non_existent_files:
-            print(f" \"{file}\"", end="")
-        print(". Exiting...")
-        sys.exit(1)
+        errorr(f"Some of the files given in input do not exists: \"{'" "'.join(non_existent_files)}\"")
 
     non_readable_files = checkFilesPermission(input_files, os.R_OK)
     if (len(non_readable_files) > 0):
-        print("ERROR: Some of the files given in input are not readable:", end="")
-        for file in non_readable_files:
-            print(f" \"{file}\"", end="")
-        print(". Exiting...")
-        sys.exit(1)
+        errorr(f"Some of the files given in input are not readable: \"{'" "'.join(non_readable_files)}\"")
 
 
 
