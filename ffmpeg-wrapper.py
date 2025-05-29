@@ -108,14 +108,21 @@ def choice(ask_str, default, options):
 
 
 # Given an array of file paths in input,
-# returns an array of the files that do not exists.
+# returns a tuple containing two array,
+# the first with the files that do exist,
+# the second with the ones that do not.
 
 def checkFilesExistence(file_array):
-    res = []
+    existent_files = []
+    non_existent_files = []
+
     for file in file_array:
-        if (not os.path.isfile(file)):
-            res.append(file)
-    return res
+        if os.path.isfile(file):
+            existent_files.append(file)
+        else:
+            non_existent_files.append(file)
+
+    return existent_files, non_existent_files
 
 
 
@@ -124,11 +131,16 @@ def checkFilesExistence(file_array):
 # 'permission' can be: os.R_OK, os.W_OK or os.X_OK
 
 def checkFilesPermission(file_array, permission):
-    res = []
+    valid_perm_files = []
+    invalid_perm_files = []
+
     for file in file_array:
-        if (not os.access(file, permission)):
-            res.append(file)
-    return res
+        if os.access(file, permission):
+            valid_perm_files.append(file)
+        else:
+            invalid_perm_files.append(file)
+
+    return valid_perm_files, invalid_perm_files
 
 
 
@@ -137,11 +149,11 @@ def checkFilesPermission(file_array, permission):
 # if not, throws an error and exits
 
 def checkInputFiles(input_files):
-    non_existent_files = checkFilesExistence(input_files)
+    _, non_existent_files = checkFilesExistence(input_files)
     if (len(non_existent_files) > 0):
         errorr(f"Some of the files given in input do not exists: \"{'" "'.join(non_existent_files)}\"")
 
-    non_readable_files = checkFilesPermission(input_files, os.R_OK)
+    _, non_readable_files = checkFilesPermission(input_files, os.R_OK)
     if (len(non_readable_files) > 0):
         errorr(f"Some of the files given in input are not readable: \"{'" "'.join(non_readable_files)}\"")
 
