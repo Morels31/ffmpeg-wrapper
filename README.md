@@ -16,6 +16,7 @@ python3 ffmpeg wrapper intended for personal use.
 - [ ] Execute ffmpeg and check return code, if failed save failed filenames and logs and report it later.
 - [x] Add --use-defaults argument.
 - [ ] Check if ffmpeg is installed.
+- [ ] Log everything.
 
 ## Optional TODO
 - [ ] Time how much time each file has taken.
