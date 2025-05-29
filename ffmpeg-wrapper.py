@@ -77,11 +77,10 @@ def askNumber(ask_str, default, minimum, maximum):
 
 
 # Ask the user via the 'ask_str' string
-# to choose between an array (or dictionary) of 'options'.
+# to choose between an array of 'options'.
 # Returns the choosen option, or the 'default' one.
 
 def choice(ask_str, default, options):
-    options = list(options)
     if (default not in options):
         errorr("Default option is not a valid option")
 
@@ -271,7 +270,7 @@ def main():
         crf = default_crf
         output_dir = default_output_dir
     else:
-        codec = choice("\nSelect codec: ", default_codec, codecs)
+        codec = choice("\nSelect codec: ", default_codec, list(codecs))
         preset = choice("\nSelect preset: ", default_preset, presets)
         container = choice("\nSelect container: ", default_container, containers)
         crf = askNumber("\nEnter CRF (default is 20): ", default_crf, 0, 51)
