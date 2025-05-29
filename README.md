@@ -17,6 +17,7 @@ python3 ffmpeg wrapper intended for personal use.
 - [x] Add --use-defaults argument.
 - [ ] Check if ffmpeg is installed.
 - [ ] Log everything.
+- [ ] Comment everything.
 
 ## Optional TODO
 - [ ] Time how much time each file has taken.
