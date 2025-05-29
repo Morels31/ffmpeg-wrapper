@@ -107,6 +107,18 @@ def choice(ask_str, default, options):
 
 
 
+# Given an array in input,
+# it returns only the unique values, in the original order.
+
+def getUniqueValues(array):
+    res = []
+    for i in array:
+        if i not in res:
+            res.append(i)
+    return res
+
+
+
 # Given an array of file paths in input,
 # returns a tuple containing two array,
 # the first with the files that do exist,
@@ -145,10 +157,14 @@ def checkFilesPermission(file_array, permission):
 
 
 # Given an array of file paths in input,
-# checks if all the files exists and are readable,
+# checks if all the files do not start with ".." exists and are readable,
 # if not, throws an error and exits
 
 def checkInputFiles(input_files):
+    for file in input_files:
+        if file.startswith(".."):
+            errorr("An input file cannot start with \"..\" it would break output directory structure")
+
     _, non_existent_files = checkFilesExistence(input_files)
     if (len(non_existent_files) > 0):
         errorr(f"Some of the files given in input do not exists: \"{'" "'.join(non_existent_files)}\"")
@@ -240,6 +256,10 @@ def main():
     if (len(input_files) == 0):
         print(help_message, end="")
         sys.exit(1)
+
+
+    input_files = [ os.path.normpath(file) for file in input_files ]
+    input_files = getUniqueValues(input_files)
 
     checkInputFiles(input_files)
 
