@@ -46,6 +46,8 @@ default_output_dir = "./renders-output"
 
 default_overwrite_existing_output = True
 
+default_continue = True
+
 
 
 
@@ -352,9 +354,18 @@ def main():
 
 
 
-    for i in range(len(input_files)):
+    print("\nFiles summary:")
+    for i in range(file_N):
+        print(f"\t{input_files[i]} --> {output_files[i]}")
 
-        # handle output sub-dir tree
+    print("\nSettings summary:")
+    print(f"\tCodec: \"{codec}\"\n\tPreset: \"{preset}\"\n\tCRF: \"{crf}\"\n\tContainer: \"{container}\"")
+
+
+    if not askYesNo("\nContinue?", default_continue):
+        sys.exit(1)
+
+    for i in range(file_N):
 
         ffmpegRender(input_files[i], output_files[i], ffmpeg_options)
 
