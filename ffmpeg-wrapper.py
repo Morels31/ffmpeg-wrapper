@@ -55,7 +55,7 @@ default_continue = True
 # Prints the error string taken in input and terminates the script.
 
 def errorr(s):
-    print(f"ERROR: {s}. Exiting...")
+    print(f"\nERROR: {s}. Exiting...")
     sys.exit(1)
 
 
