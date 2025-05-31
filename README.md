@@ -12,7 +12,7 @@ python3 ffmpeg wrapper intended for personal use.
 - [x] Create the output directory if it doesn't exists (error if cannot write).
 - [x] Check if output files already exists, and ask the user to overwrite or not (check write permission).
 - [x] Normalize input files and output directory path.
-- [ ] Mantain sub-directory tree of the output files.
+- [x] Mantain sub-directory tree of the output files.
 - [ ] Execute ffmpeg and check return code, if failed save failed filenames and logs and report it later.
 - [x] Add --use-defaults argument.
 - [ ] Check if ffmpeg is installed.
