@@ -332,9 +332,10 @@ def main():
 
 
     if (container == keep_container_string):
-        output_files = [ os.path.join(output_dir, input_file) for input_file in input_files ]
+        output_files = [ os.path.normpath(os.path.join(output_dir, input_file)) for input_file in input_files ]
     else:
-        output_files = [ os.path.join(output_dir, changeExtension(input_file, container)) for input_file in input_files ]
+        output_files = [ os.path.normpath(os.path.join(output_dir, changeExtension(input_file, container))) for input_file in input_files ]
+
 
     checkOutputFiles(output_files)
 
