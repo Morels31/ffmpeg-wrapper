@@ -221,16 +221,16 @@ def checkOutputFiles(output_files):
 
 
 
-# Create the output directory if it doen't exists.
+# Create the directory recursively if it doesn't exists.
 # Check write and execute permission if it does.
 
-def createOutputDir(output_dir):
-    if os.path.isdir(output_dir):
-        if ((not os.access(output_dir, os.W_OK)) or (not os.access(output_dir, os.X_OK))):
-            errorr("Cannot write to already existing output directory, permission denied")
+def createDirectory(directory):
+    if os.path.isdir(directory):
+        if ((not os.access(directory, os.W_OK)) or (not os.access(directory, os.X_OK))):
+            errorr("Cannot write to already existing directory, permission denied")
     else:
         try:
-            os.makedirs(output_dir)
+            os.makedirs(directory)
         except Exception as e:
             errorr(e)
 
@@ -327,7 +327,8 @@ def main():
 
     ffmpeg_options = codecs[codec] + ["-preset", preset, "-crf", str(crf), "-y"]
 
-    createOutputDir(output_dir)
+
+    createDirectory(output_dir)
 
 
     if (container == keep_container_string):
@@ -338,7 +339,8 @@ def main():
     checkOutputFiles(output_files)
 
 
-    # print a summary of the actions before starting
+    for output_file in output_files:
+        createDirectory(os.path.dirname(output_file))
 
 
     if (len(input_files) != len(output_files)):
