@@ -14,6 +14,8 @@ OPTIONS:
 
 keep_container_string = "Keep the same"
 
+custom_ffmpeg_ret_code = 67108097117100105111
+
 codecs = {
     "h264"       : ["-c:v", "libx264"],
     "h265"       : ["-c:v", "libx265", "-x265-params", "profile=main10"],
@@ -284,8 +286,8 @@ def ffmpegRender(input_file, output_file, options):
         except:
             pass
 
-        print(f"ERROR: Failed rendering \"{input_file}\". Exception: {e}")
-        return 1
+        print(f"ERROR: Failed rendering \"{input_file}\". Exception: {e}. Continuing anyway...")
+        return custom_ffmpeg_ret_code
 
 
 
@@ -354,8 +356,8 @@ def main():
 
 
     print("\nFiles summary:")
-    for i in range(file_N):
-        print(f"\t{input_files[i]} --> {output_files[i]}")
+    for input_file, output_file in zip(input_files, output_files):
+        print(f"\t{input_file} --> {output_file}")
 
     print("\nSettings summary:")
     print(f"\tCodec: \"{codec}\"\n\tPreset: \"{preset}\"\n\tCRF: \"{crf}\"\n\tContainer: \"{container}\"")
@@ -364,11 +366,20 @@ def main():
     if not askYesNo("\nContinue?", default_continue):
         sys.exit(1)
 
-    for i in range(file_N):
+    failed_renders = []
+    for input_file, output_file in zip(input_files, output_files):
 
-        ffmpegRender(input_files[i], output_files[i], ffmpeg_options)
+        print(f"\nRendering: {input_file}\n")
+        ret_code = ffmpegRender(input_file, output_file, ffmpeg_options)
 
-        # handle errors
+        if (ret_code != 0):
+            if (ret_code != custom_ffmpeg_ret_code):
+                print(f"\nERROR: Failed rendering {input_file}. Continuing anyway...")
+            failed_renders.append(input_file)
+            try:
+                os.remove(output_file)
+            except:
+                pass
 
 
     print("\n\nScript finished.")
