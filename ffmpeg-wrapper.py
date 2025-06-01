@@ -334,24 +334,23 @@ def main():
 
 
     if (container == keep_container_string):
-        output_files = [ os.path.normpath(os.path.join(output_dir, input_file)) for input_file in input_files ]
+        inputToOutput = lambda input_file, output_dir, container : os.path.normpath(os.path.join(output_dir, input_file))
     else:
-        output_files = [ os.path.normpath(os.path.join(output_dir, changeExtension(input_file, container))) for input_file in input_files ]
+        inputToOutput = lambda input_file, output_dir, container : os.path.normpath(os.path.join(output_dir, changeExtension(input_file, container)))
 
-    file_N = len(input_files)
-    if (file_N != len(output_files)):
-        errorr("Paranoid error")
+    output_files = []
+    for input_file in input_files:
+
+        output_file = inputToOutput(input_file, output_dir, container)
+
+        if (output_file in input_files):
+            errorr(f"The output file: \"{output_file}\" cannot overwrite an input file")
+
+        createDirectory(os.path.dirname(output_file))
+        output_files.append(output_file)
+
 
     checkOutputFiles(output_files)
-
-    tmp_set = set(input_files)
-    tmp_set.update(set(output_files))
-    if (len(tmp_set) != file_N*2):
-        errorr("Output files cannot overwrite input files")
-
-    for output_file in output_files:
-        createDirectory(os.path.dirname(output_file))
-
 
 
     print("\nFiles summary:")
