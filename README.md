@@ -20,6 +20,7 @@ python3 ffmpeg wrapper intended for personal use.
 - [ ] Comment everything.
 
 ## Optional TODO
+- [ ] Colors.
 - [ ] Time how much time each file has taken.
 - [ ] Check if output file is smaller, and if it is by how much.
 - [ ] Makefile to install the script.
