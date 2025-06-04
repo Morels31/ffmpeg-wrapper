@@ -359,12 +359,11 @@ def main():
     for input_file, output_file in zip(input_files, output_files):
         print(f"\t{input_file} --> {output_file}")
 
-    print("\nSettings summary:")
-    print(f"\tCodec: \"{codec}\"\n\tPreset: \"{preset}\"\n\tCRF: \"{crf}\"\n\tContainer: \"{container}\"")
-
+    print(f"\nSettings summary:\n\tCodec: \"{codec}\"\n\tPreset: \"{preset}\"\n\tCRF: \"{crf}\"\n\tContainer: \"{container}\"")
 
     if not askYesNo("\nContinue?", default_continue):
         sys.exit(1)
+
 
     failed_renders = []
     for input_file, output_file in zip(input_files, output_files):
@@ -381,8 +380,12 @@ def main():
             except:
                 pass
 
-
-    print("\n\nScript finished.")
+    if (len(failed_renders) > 0):
+        print(f"\n\nRendering ERRORS (check logs):\n\t\"{'"\n\t"'.join(failed_renders)}\"\n")
+        sys.exit(1)
+    else:
+        print("\n\nScript finished successfully\n")
+        sys.exit(0)
 
 
 
