@@ -382,7 +382,7 @@ def main():
                 pass
 
     if (len(failed_renders) > 0):
-        print(f"\n\nRendering ERRORS (check logs):\n\t\"{'"\n\t"'.join(failed_renders)}\"\n")
+        print("\n\nRendering ERRORS (check logs):\n\t\"{}\"\n".format('"\n\t"'.join(failed_renders)))
         sys.exit(1)
     else:
         print("\n\nScript finished successfully\n")
