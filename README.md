@@ -27,3 +27,7 @@ python3 ffmpeg wrapper intended for personal use.
 - [ ] Telegram notification when rendering has been finished.
 - [ ] Option to automatically delete files smaller than the original.
 - [ ] Option to automatically replace original files.
+
+## BUGS
+- [x] f-strings containing strings before python version 12 are problematic.
+- [ ] './' output directory will be normalized to '', giving an error.

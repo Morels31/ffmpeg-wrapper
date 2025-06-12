@@ -10,6 +10,7 @@ USAGE: ffmpeg-wrapper [OPTIONS] inputFile1 ... inputFileN
 
 OPTIONS:
     -d, --use-defaults    Do not ask the user for input, use defaults.
+
 """
 
 keep_container_string = "Keep the same"
@@ -68,7 +69,7 @@ def errorr(s):
 
 def askYesNo(ask_str, default):
     while True:
-        x = input(f"{ask_str} [{"Y/n" if default else "y/N"}]: ")
+        x = input(f"{ask_str} [{'Y/n' if default else 'y/N'}]: ")
 
         if (len(x) == 0):
             return default
@@ -192,11 +193,11 @@ def checkInputFiles(input_files):
 
     _, non_existent_files = checkFilesExistence(input_files)
     if (len(non_existent_files) > 0):
-        errorr(f"Some of the files given in input do not exists: \"{'" "'.join(non_existent_files)}\"")
+        errorr("Some of the files given in input do not exists: \"{}\"".format('" "'.join(non_existent_files)))
 
     _, non_readable_files = checkFilesPermission(input_files, os.R_OK)
     if (len(non_readable_files) > 0):
-        errorr(f"Some of the files given in input are not readable: \"{'" "'.join(non_readable_files)}\"")
+        errorr("Some of the files given in input are not readable: \"{}\"".format('" "'.join(non_readable_files)))
 
 
 
@@ -213,14 +214,14 @@ def checkOutputFiles(output_files):
 
     existent_output_files, _ = checkFilesExistence(output_files)
     if (len(existent_output_files)>0):
-        print(f"\nWARNING: Continuing those files will be overwrited: \n\t\"{'"\n\t"'.join(existent_output_files)}\"\n")
+        print("\nWARNING: Continuing those files will be overwrited: \n\t\"{}\"\n".format('"\n\t"'.join(existent_output_files)))
 
         if not askYesNo("Continue?", default_overwrite_existing_output):
             sys.exit(1)
 
         _, non_writable_files = checkFilesPermission(output_files, os.W_OK)
         if (len(non_writable_files) > 0):
-            print(f"\nERROR: Some of the files given in input are not writable: \n\t\"{'"\n\t"'.join(non_writable_files)}\"\n\nExiting...")
+            print("\nERROR: Some of the files given in input are not writable: \n\t\"{}\"\n\nExiting...".format('"\n\t"'.join(non_writable_files)))
             sys.exit(1)
 
 
