@@ -19,8 +19,8 @@ custom_ffmpeg_ret_code = 67108097117100105111
 
 codecs = {
     "h264"       : ["-c:v", "libx264"],
-    "h265"       : ["-c:v", "libx265", "-x265-params", "profile=main10"],
-    "h265 10bit" : ["-pix_fmt", "yuv420p10le", "-c:v", "libx265", "-x265-params", "profile=main10"]
+    "h265"       : ["-c:v", "libx265"],
+    "h265 10bit" : ["-pix_fmt", "yuv420p10le", "-c:v", "libx265", "-profile:v", "main10"]
 }
 
 presets = [
