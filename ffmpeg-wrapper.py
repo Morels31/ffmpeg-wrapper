@@ -219,7 +219,7 @@ def checkOutputFiles(output_files):
         if not askYesNo("Continue?", default_overwrite_existing_output):
             sys.exit(1)
 
-        _, non_writable_files = checkFilesPermission(output_files, os.W_OK)
+        _, non_writable_files = checkFilesPermission(existent_output_files, os.W_OK)
         if (len(non_writable_files) > 0):
             print("\nERROR: Some of the files given in input are not writable: \n\t\"{}\"\n\nExiting...".format('"\n\t"'.join(non_writable_files)))
             sys.exit(1)
