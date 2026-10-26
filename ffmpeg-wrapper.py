@@ -214,7 +214,7 @@ def checkOutputFiles(output_files):
 
     existent_output_files, _ = checkFilesExistence(output_files)
     if (len(existent_output_files)>0):
-        print("\nWARNING: Continuing those files will be overwrited: \n\t\"{}\"\n".format('"\n\t"'.join(existent_output_files)))
+        print("\nWARNING: Continuing those files will be overwritten: \n\t\"{}\"\n".format('"\n\t"'.join(existent_output_files)))
 
         if not askYesNo("Continue?", default_overwrite_existing_output):
             sys.exit(1)
